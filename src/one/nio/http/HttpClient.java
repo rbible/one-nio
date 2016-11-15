@@ -28,6 +28,8 @@ import java.net.SocketException;
 import java.util.ArrayList;
 
 public class HttpClient extends SocketPool {
+    private static final long serialVersionUID = 1L;
+
     private static final int BUFFER_SIZE = 8000;
 
     protected String hostHeader;

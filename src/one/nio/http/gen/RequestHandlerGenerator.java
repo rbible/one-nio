@@ -37,6 +37,7 @@ import java.lang.reflect.Modifier;
 public class RequestHandlerGenerator extends BytecodeGenerator {
     private int count;
 
+    @SuppressWarnings("rawtypes")
     public RequestHandler generateFor(Method m, Object router) {
         if (Modifier.isStatic(m.getModifiers())) {
             throw new IllegalArgumentException("Method should not be static: " + m);
@@ -97,6 +98,7 @@ public class RequestHandlerGenerator extends BytecodeGenerator {
         return instantiate(cv.toByteArray(), m, router);
     }
 
+    @SuppressWarnings("rawtypes")
     private void setupArguments(MethodVisitor mv, Method m) {
         Class[] types = m.getParameterTypes();
         Annotation[][] annotations = m.getParameterAnnotations();
@@ -123,6 +125,7 @@ public class RequestHandlerGenerator extends BytecodeGenerator {
         }
     }
 
+    @SuppressWarnings("rawtypes")
     private void setupParam(MethodVisitor mv, Class type, Param param) {
         String name = param.value();
         String defaultValue = null;
@@ -149,6 +152,7 @@ public class RequestHandlerGenerator extends BytecodeGenerator {
         convertArgument(mv, type, needNullCheck);
     }
 
+    @SuppressWarnings("rawtypes")
     private void setupHeader(MethodVisitor mv, Class type, Header header) {
         String name = header.value();
         String defaultValue = null;
@@ -175,6 +179,7 @@ public class RequestHandlerGenerator extends BytecodeGenerator {
         convertArgument(mv, type, needNullCheck);
     }
 
+    @SuppressWarnings("rawtypes")
     private void convertArgument(MethodVisitor mv, Class type, boolean needNullCheck) {
         if (type == String.class) {
             return; // nothing to do
@@ -236,6 +241,7 @@ public class RequestHandlerGenerator extends BytecodeGenerator {
         }
     }
 
+    @SuppressWarnings("rawtypes")
     private RequestHandler instantiate(byte[] classData, Method m, Object router) {
         try {
             Class<?> resultClass = super.defineClass(classData);

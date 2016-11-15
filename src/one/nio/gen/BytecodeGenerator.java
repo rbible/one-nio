@@ -126,6 +126,7 @@ public class BytecodeGenerator extends ClassLoader implements BytecodeGeneratorM
         mv.visitMethodInsn(opcode, holder, name, sig);
     }
 
+    @SuppressWarnings("rawtypes")
     public static void emitInvoke(MethodVisitor mv, Constructor c) {
         String holder = Type.getInternalName(c.getDeclaringClass());
         String name = c.getName();
@@ -183,6 +184,7 @@ public class BytecodeGenerator extends ClassLoader implements BytecodeGeneratorM
         }
     }
 
+    @SuppressWarnings("rawtypes")
     public static void emitBoxing(MethodVisitor mv, Class type) {
         if (type == boolean.class) {
             mv.visitMethodInsn(INVOKESTATIC, "java/lang/Boolean", "valueOf", "(Z)Ljava/lang/Boolean;");
@@ -207,6 +209,7 @@ public class BytecodeGenerator extends ClassLoader implements BytecodeGeneratorM
         }
     }
 
+    @SuppressWarnings("rawtypes")
     public static void emitUnboxing(MethodVisitor mv, Class type) {
         if (type == Boolean.class) {
             mv.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Boolean", "booleanValue", "()Z");

@@ -18,6 +18,8 @@ package one.nio.async;
 
 public class AsyncException extends RuntimeException {
 
+    private static final long serialVersionUID = 1L;
+
     public AsyncException() {
     }
 

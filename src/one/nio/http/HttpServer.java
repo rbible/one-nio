@@ -56,6 +56,7 @@ public class HttpServer extends Server {
         session.writeResponse(request, response);
     }
 
+    @SuppressWarnings("rawtypes")
     public void addRequestHandlers(Object router) {
         ArrayList<Class> supers = new ArrayList<Class>(4);
         for (Class cls = router.getClass(); cls != Object.class; cls = cls.getSuperclass()) {

@@ -23,8 +23,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 public class CombinedFuture<V> implements Future<V[]>, Serializable {
+    private static final long serialVersionUID = 1L;
     private Future<V>[] futures;
 
+    @SuppressWarnings("unchecked")
     public CombinedFuture(Future<V>... futures) {
         this.futures = futures;
     }

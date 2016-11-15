@@ -27,6 +27,7 @@ import javax.tools.JavaFileManager;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
+
 import java.io.ByteArrayOutputStream;
 import java.io.CharArrayWriter;
 import java.io.File;
@@ -36,6 +37,7 @@ import java.net.URLClassLoader;
 import java.util.Arrays;
 import java.util.List;
 
+@SuppressWarnings("restriction")
 public class Javac {
     private final JavaCompiler compiler;
     private final StandardJavaFileManager fileManager;
@@ -63,7 +65,8 @@ public class Javac {
 
         JavaFileManager manager = new ForwardingJavaFileManager<StandardJavaFileManager>(fileManager) {
             @Override
-            public JavaFileObject getJavaFileForOutput(Location location, String className, JavaFileObject.Kind kind, FileObject sibling) {
+            public JavaFileObject getJavaFileForOutput(Location location, String className, JavaFileObject.Kind kind,
+                    FileObject sibling) {
                 return new MemoryOutputFileObject(output);
             }
         };

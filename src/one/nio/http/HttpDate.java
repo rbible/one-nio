@@ -21,6 +21,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public final class HttpDate extends GregorianCalendar {
+    private static final long serialVersionUID = 1L;
     private static final TimeZone GMT = TimeZone.getTimeZone("GMT");
     private static final String[] DAYS = { null, "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
     private static final String[] MONTHS = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };

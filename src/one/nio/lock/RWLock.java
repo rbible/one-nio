@@ -19,6 +19,7 @@ package one.nio.lock;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
+@SuppressWarnings("serial")
 public class RWLock extends Semaphore {
     private static final int WRITE_PERMITS = 65536;
 

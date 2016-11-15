@@ -26,6 +26,7 @@ import javax.management.JMException;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 import javax.management.StandardMBean;
+
 import java.lang.management.ManagementFactory;
 import java.util.Collections;
 import java.util.Set;
@@ -46,8 +47,10 @@ public class Management {
         registerMXBean(object, null, name);
     }
 
+    @SuppressWarnings("rawtypes")
     public static void registerMXBean(Object object, Class mxbeanInterface, String name) {
         try {
+            @SuppressWarnings("unchecked")
             StandardMBean mb = new StandardMBean(object, mxbeanInterface, true);
             MBeanServer beanServer = ManagementFactory.getPlatformMBeanServer();
 

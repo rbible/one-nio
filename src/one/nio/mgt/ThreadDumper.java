@@ -34,11 +34,10 @@ public class ThreadDumper {
         File javaHome = new File(System.getProperty("java.home"));
         String toolsPath = javaHome.getName().equalsIgnoreCase("jre") ? "../lib/tools.jar" : "lib/tools.jar";
 
-        URL[] urls = new URL[] {
-                ThreadDumper.class.getProtectionDomain().getCodeSource().getLocation(),
-                new File(javaHome, toolsPath).getCanonicalFile().toURI().toURL(),
-        };
+        URL[] urls = new URL[] { ThreadDumper.class.getProtectionDomain().getCodeSource().getLocation(),
+                new File(javaHome, toolsPath).getCanonicalFile().toURI().toURL(), };
 
+        @SuppressWarnings("resource")
         URLClassLoader loader = new URLClassLoader(urls, null);
         return loader.loadClass("one.nio.mgt.ThreadDumperImpl").getMethod("dump", OutputStream.class);
     }

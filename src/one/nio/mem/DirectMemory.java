@@ -17,7 +17,6 @@
 package one.nio.mem;
 
 import one.nio.util.JavaInternals;
-
 import sun.misc.Cleaner;
 
 import java.nio.Buffer;
@@ -25,6 +24,7 @@ import java.nio.ByteBuffer;
 
 import static one.nio.util.JavaInternals.unsafe;
 
+@SuppressWarnings("restriction")
 public final class DirectMemory {
     private static final long addressOffset = JavaInternals.fieldOffset(Buffer.class, "address");
     private static final ByteBuffer prototype = createPrototype();
@@ -73,17 +73,20 @@ public final class DirectMemory {
 
     public static boolean compare(Object obj1, long offset1, Object obj2, long offset2, int count) {
         for (; count >= 8; count -= 8) {
-            if (unsafe.getLong(obj1, offset1) != unsafe.getLong(obj2, offset2)) return false;
+            if (unsafe.getLong(obj1, offset1) != unsafe.getLong(obj2, offset2))
+                return false;
             offset1 += 8;
             offset2 += 8;
         }
         if ((count & 4) != 0) {
-            if (unsafe.getInt(obj1, offset1) != unsafe.getInt(obj2, offset2)) return false;
+            if (unsafe.getInt(obj1, offset1) != unsafe.getInt(obj2, offset2))
+                return false;
             offset1 += 4;
             offset2 += 4;
         }
         if ((count & 2) != 0) {
-            if (unsafe.getShort(obj1, offset1) != unsafe.getShort(obj2, offset2)) return false;
+            if (unsafe.getShort(obj1, offset1) != unsafe.getShort(obj2, offset2))
+                return false;
             offset1 += 2;
             offset2 += 2;
         }
@@ -91,6 +94,7 @@ public final class DirectMemory {
     }
 
     // Similar to Unsafe.copyMemory, but better for small arrays
+
     public static void copy(Object from, long fromOffset, Object to, long toOffset, int count) {
         for (; count >= 8; count -= 8) {
             unsafe.putLong(to, toOffset, unsafe.getLong(from, fromOffset));

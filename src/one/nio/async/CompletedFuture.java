@@ -21,6 +21,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 public class CompletedFuture<V> implements Future<V>, Serializable {
+    private static final long serialVersionUID = 1L;
     private V value;
 
     public CompletedFuture(V value) {
